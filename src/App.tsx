@@ -11,6 +11,11 @@ import Tasks from "./pages/Tasks";
 import Community from "./pages/Community";
 import Rewards from "./pages/Rewards";
 import Profile from "./pages/Profile";
+import TeachSkill from "./pages/TeachSkill";
+import LearnSkill from "./pages/LearnSkill";
+import ExchangeSkills from "./pages/ExchangeSkills";
+import TaskMarketplace from "./pages/TaskMarketplace";
+import CampusCommunity from "./pages/CampusCommunity";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,7 +35,11 @@ const App = () => (
           <Route path="/community" element={<Community />} />
           <Route path="/rewards" element={<Rewards />} />
           <Route path="/profile" element={<Profile />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/teach-skill" element={<TeachSkill />} />
+          <Route path="/learn-skill" element={<LearnSkill />} />
+          <Route path="/exchange-skills" element={<ExchangeSkills />} />
+          <Route path="/task-marketplace" element={<TaskMarketplace />} />
+          <Route path="/campus-community" element={<CampusCommunity />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
