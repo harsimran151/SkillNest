@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import FloatingNav from '@/components/FloatingNav';
 import FeatureCard from '@/components/FeatureCard';
+import NotificationPanel from '@/components/NotificationPanel';
+import Footer from '@/components/Footer';
 import { 
   GraduationCap, BookOpen, ArrowRightLeft, Briefcase,
   Building2, Gift, Bell, Users, Sparkles, TrendingUp
@@ -10,6 +13,7 @@ import {
 const Home = () => {
   const { user, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const [showNotifications, setShowNotifications] = useState(false);
 
   if (!isAuthenticated) {
     navigate('/login');
@@ -64,9 +68,17 @@ const Home = () => {
   return (
     <div className="min-h-screen gradient-hero pb-28 relative overflow-hidden">
       {/* Background Decorations */}
-      <div className="absolute top-20 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-40 left-0 w-48 h-48 bg-accent/5 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 right-10 w-32 h-32 bg-feature-learn/5 rounded-full blur-2xl" />
+      <div className="absolute top-20 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute bottom-40 left-0 w-48 h-48 bg-accent/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-1/2 right-10 w-32 h-32 bg-feature-learn/5 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }} />
+      
+      {/* Decorative Education Icons */}
+      <div className="absolute top-32 left-6 opacity-10">
+        <BookOpen className="w-20 h-20 text-primary" />
+      </div>
+      <div className="absolute top-48 right-8 opacity-10">
+        <GraduationCap className="w-16 h-16 text-accent" />
+      </div>
 
       {/* Header */}
       <header className="px-6 pt-8 pb-4 relative">
@@ -77,55 +89,60 @@ const Home = () => {
               {user?.name?.split(' ')[0] || 'Learner'} 👋
             </h1>
           </div>
-          <button className="relative p-3 rounded-xl bg-card shadow-soft hover:shadow-card transition-all duration-200">
+          <button 
+            onClick={() => setShowNotifications(true)}
+            className="relative p-3 rounded-xl bg-card shadow-soft hover:shadow-card transition-all duration-200 hover:scale-105"
+          >
             <Bell className="w-6 h-6 text-foreground" />
-            <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-accent rounded-full" />
+            <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-accent rounded-full animate-pulse" />
           </button>
         </div>
       </header>
 
       {/* Branding & Tagline */}
       <div className="px-6 mb-6 relative">
-        <div className="text-center mb-4">
-          <h2 className="text-3xl font-extrabold bg-gradient-to-r from-primary via-feature-learn to-accent bg-clip-text text-transparent">
+        <div className="text-center mb-6">
+          <h2 className="text-4xl font-extrabold bg-gradient-to-r from-primary via-feature-learn to-accent bg-clip-text text-transparent animate-fade-in">
             SkillNest
           </h2>
-          <p className="text-muted-foreground text-sm mt-1">
+          <p className="text-muted-foreground text-base mt-2 animate-fade-in" style={{ animationDelay: '0.1s' }}>
             Where Skills Meet, Students Grow 🚀
           </p>
         </div>
 
-        {/* Stats Card */}
-        <div className="bg-card rounded-2xl shadow-card p-4">
-          <div className="grid grid-cols-3 gap-4 text-center">
-            <div>
-              <div className="flex items-center justify-center gap-1">
-                <Users className="w-4 h-4 text-primary" />
-                <span className="text-xl font-bold text-foreground">5,420</span>
+        {/* Stats Card - Centered & Compact */}
+        <div className="max-w-xs mx-auto">
+          <div className="bg-card rounded-2xl shadow-card p-4 animate-scale-in" style={{ animationDelay: '0.2s' }}>
+            <div className="grid grid-cols-3 gap-3 text-center">
+              <div className="hover:scale-105 transition-transform">
+                <div className="flex items-center justify-center gap-1">
+                  <Users className="w-4 h-4 text-primary" />
+                  <span className="text-lg font-bold text-foreground">5,420</span>
+                </div>
+                <p className="text-xs text-muted-foreground">Students</p>
               </div>
-              <p className="text-xs text-muted-foreground">Students</p>
-            </div>
-            <div>
-              <div className="flex items-center justify-center gap-1">
-                <Sparkles className="w-4 h-4 text-feature-learn" />
-                <span className="text-xl font-bold text-foreground">1,250</span>
+              <div className="hover:scale-105 transition-transform">
+                <div className="flex items-center justify-center gap-1">
+                  <Sparkles className="w-4 h-4 text-feature-learn" />
+                  <span className="text-lg font-bold text-foreground">1,250</span>
+                </div>
+                <p className="text-xs text-muted-foreground">Skills</p>
               </div>
-              <p className="text-xs text-muted-foreground">Skills</p>
-            </div>
-            <div>
-              <div className="flex items-center justify-center gap-1">
-                <TrendingUp className="w-4 h-4 text-accent" />
-                <span className="text-xl font-bold text-foreground">890</span>
+              <div className="hover:scale-105 transition-transform">
+                <div className="flex items-center justify-center gap-1">
+                  <TrendingUp className="w-4 h-4 text-accent" />
+                  <span className="text-lg font-bold text-foreground">890</span>
+                </div>
+                <p className="text-xs text-muted-foreground">Exchanges</p>
               </div>
-              <p className="text-xs text-muted-foreground">Exchanges</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Quick Points */}
-      <div className="px-6 mb-6">
-        <div className="bg-card rounded-2xl shadow-soft p-4">
+      <div className="px-6 mb-6 max-w-md mx-auto">
+        <div className="bg-card rounded-2xl shadow-soft p-4 hover:shadow-card transition-all">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-2xl gradient-primary flex items-center justify-center shadow-glow">
               <Sparkles className="w-6 h-6 text-primary-foreground" />
@@ -143,8 +160,8 @@ const Home = () => {
       </div>
 
       {/* Features Grid */}
-      <div className="px-6">
-        <h2 className="text-lg font-semibold text-foreground mb-4">What would you like to do?</h2>
+      <div className="px-6 max-w-md mx-auto">
+        <h2 className="text-lg font-semibold text-foreground mb-4 text-center">What would you like to do?</h2>
         <div className="grid grid-cols-2 gap-4">
           {features.map((feature, index) => (
             <div 
@@ -163,6 +180,15 @@ const Home = () => {
           ))}
         </div>
       </div>
+
+      {/* Footer */}
+      <Footer />
+
+      {/* Notification Panel */}
+      <NotificationPanel 
+        isOpen={showNotifications} 
+        onClose={() => setShowNotifications(false)} 
+      />
 
       <FloatingNav />
     </div>

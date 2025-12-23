@@ -1,11 +1,11 @@
 import { NavLink, useLocation } from 'react-router-dom';
-import { Home, CheckSquare, Users, Gift, User } from 'lucide-react';
+import { Home, Briefcase, Users, Gift, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
   { path: '/home', label: 'Home', icon: Home, color: 'text-feature-teach' },
-  { path: '/tasks', label: 'Tasks', icon: CheckSquare, color: 'text-feature-learn' },
-  { path: '/community', label: 'Community', icon: Users, color: 'text-feature-study' },
+  { path: '/task-marketplace', label: 'Tasks', icon: Briefcase, color: 'text-feature-learn' },
+  { path: '/campus-community', label: 'Community', icon: Users, color: 'text-feature-study' },
   { path: '/rewards', label: 'Rewards', icon: Gift, color: 'text-feature-quiz' },
   { path: '/profile', label: 'Profile', icon: User, color: 'text-feature-mentor' },
 ];
