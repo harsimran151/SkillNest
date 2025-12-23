@@ -19,9 +19,9 @@ const Footer = () => {
           {/* Brand */}
           <div className="text-center mb-6">
             <div className="flex items-center justify-center gap-2 mb-2">
-              <GraduationCap className="w-6 h-6 text-primary" />
-              <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                SkillNest
+              <GraduationCap className="w-6 h-6 text-feature-teach" />
+              <span className="text-xl font-bold bg-gradient-to-r from-feature-teach via-primary to-feature-learn bg-clip-text text-transparent">
+                Skill Nest
               </span>
             </div>
             <p className="text-sm text-muted-foreground">
@@ -62,7 +62,7 @@ const Footer = () => {
           {/* Copyright */}
           <div className="text-center text-xs text-muted-foreground border-t border-border/50 pt-4">
             <p className="flex items-center justify-center gap-1">
-              Made with <Heart className="w-3 h-3 text-destructive fill-destructive" /> by SkillNest Team © 2024
+              Made with <Heart className="w-3 h-3 text-destructive fill-destructive" /> by Skill Nest Team © 2024
             </p>
           </div>
         </div>
