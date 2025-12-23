@@ -55,21 +55,21 @@ const FeatureCard = ({ title, description, icon, color, onClick }: FeatureCardPr
     <button
       onClick={onClick}
       className={cn(
-        "w-full p-5 rounded-2xl border-2 bg-card text-left transition-all duration-300",
-        "hover:scale-[1.02] active:scale-[0.98]",
+        "w-full p-6 rounded-2xl border-2 bg-card text-left transition-all duration-300",
+        "hover:scale-[1.03] active:scale-[0.98]",
         colors.border,
         colors.glow
       )}
     >
       <div className={cn(
-        "w-12 h-12 rounded-xl flex items-center justify-center mb-3",
+        "w-14 h-14 rounded-xl flex items-center justify-center mb-4",
         colors.bg
       )}>
         <div className={colors.text}>
           {icon}
         </div>
       </div>
-      <h3 className="font-semibold text-foreground mb-1">{title}</h3>
+      <h3 className="font-semibold text-foreground mb-1.5 text-base">{title}</h3>
       <p className="text-sm text-muted-foreground line-clamp-2">{description}</p>
     </button>
   );
