@@ -91,16 +91,21 @@ const Signup = () => {
       
       <div className="w-full max-w-md animate-slide-up">
         {/* Logo/Brand */}
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl gradient-primary shadow-glow mb-4">
-            <Sparkles className="w-8 h-8 text-primary-foreground" />
-          </div>
-          <h1 className="text-3xl font-bold text-foreground">Create Account</h1>
-          <p className="text-muted-foreground mt-2">Join our community of learners</p>
+        <div className="flex justify-center items-center gap-4 mb-8 w-full">
+        {/* Logo / Icon */}
+        <div className="flex-shrink-0 inline-flex items-center justify-center w-16 h-16 rounded-2xl gradient-primary shadow-glow">
+          <Sparkles className="w-8 h-8 text-primary-foreground" />
         </div>
+
+        {/* Text Content */}
+        <div className="text-left">
+          <h1 className="text-3xl font-bold text-foreground leading-tight">Create Account</h1>
+          <p className="text-muted-foreground">Join our community of learners</p>
+        </div>
+      </div>
         
         {/* Signup Form */}
-        <div className="bg-card rounded-3xl shadow-card p-8">
+        <div className="bg-card rounded-2xl shadow-card p-8">
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Name Field */}
             <div className="space-y-2">

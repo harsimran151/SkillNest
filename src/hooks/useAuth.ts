@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import { authAPI } from '@/lib/apiEndpoints';
+import { authUtils } from '@/lib/authUtils';
 
 interface User {
   id: string;
@@ -9,59 +11,88 @@ interface User {
 interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
   login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   signup: (name: string, email: string, password: string) => Promise<{ success: boolean; error?: string }>;
-  logout: () => void;
+  logout: () => Promise<void>;
+  setUser: (user: User | null) => void;
+  checkAuth: () => void;
 }
 
-// Simulated user database
-const users: Map<string, { name: string; email: string; password: string }> = new Map();
-
 export const useAuth = create<AuthState>((set) => ({
-  user: null,
-  isAuthenticated: false,
-  
+  user: authUtils.getUser(),
+  isAuthenticated: authUtils.isAuthenticated(),
+  isLoading: false,
+  error: null,
+
   login: async (email: string, password: string) => {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
-    const storedUser = users.get(email);
-    
-    if (!storedUser) {
-      return { success: false, error: 'No account found with this email. Please sign up first.' };
+    set({ isLoading: true, error: null });
+    try {
+      const response = await authAPI.login({ email, password });
+      authUtils.setToken(response.token);
+      authUtils.setUser(response.user);
+      set({
+        user: response.user,
+        isAuthenticated: true,
+        isLoading: false,
+      });
+      return { success: true };
+    } catch (error: any) {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        'Login failed. Please try again.';
+      set({ error: errorMessage, isLoading: false });
+      return { success: false, error: errorMessage };
     }
-    
-    if (storedUser.password !== password) {
-      return { success: false, error: 'Incorrect password. Please try again.' };
-    }
-    
-    set({
-      user: { id: email, name: storedUser.name, email },
-      isAuthenticated: true,
-    });
-    
-    return { success: true };
   },
-  
+
   signup: async (name: string, email: string, password: string) => {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
-    if (users.has(email)) {
-      return { success: false, error: 'An account with this email already exists. Please log in.' };
+    set({ isLoading: true, error: null });
+    try {
+      const response = await authAPI.signup({ name, email, password });
+      authUtils.setToken(response.token);
+      authUtils.setUser(response.user);
+      set({
+        user: response.user,
+        isAuthenticated: true,
+        isLoading: false,
+      });
+      return { success: true };
+    } catch (error: any) {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        'Signup failed. Please try again.';
+      set({ error: errorMessage, isLoading: false });
+      return { success: false, error: errorMessage };
     }
-    
-    users.set(email, { name, email, password });
-    
-    set({
-      user: { id: email, name, email },
-      isAuthenticated: true,
-    });
-    
-    return { success: true };
   },
-  
-  logout: () => {
-    set({ user: null, isAuthenticated: false });
+
+  logout: async () => {
+    try {
+      await authAPI.logout();
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      authUtils.logout();
+      set({ user: null, isAuthenticated: false, error: null });
+    }
+  },
+
+  setUser: (user: User | null) => {
+    if (user) {
+      authUtils.setUser(user);
+    } else {
+      authUtils.removeUser();
+    }
+    set({ user, isAuthenticated: !!user });
+  },
+
+  checkAuth: () => {
+    const user = authUtils.getUser();
+    const isAuthenticated = authUtils.isAuthenticated();
+    set({ user, isAuthenticated });
   },
 }));

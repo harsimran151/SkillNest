@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 @layer base {
   :root {
@@ -232,4 +232,150 @@
   to {
     opacity: 1;
   }
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+
+/* ===== MARQUEE ===== */
+
+@keyframes testimonial-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.testimonial-viewport {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.testimonial-track {
+  display: flex;
+  width: max-content;
+  animation: testimonial-scroll 40s linear infinite;
+}
+
+.testimonial-viewport:hover .testimonial-track {
+  animation-play-state: paused;
+}
+
+/* ===== CARD LAYOUT WRAPPER ===== */
+/* This absorbs the scale so NOTHING gets clipped */
+.testimonial-card-wrapper {
+  padding: 20px 12px; /* vertical padding is KEY */
+  flex-shrink: 0;
+}
+
+/* ===== ACTUAL CARD ===== */
+.testimonial-card-inner {
+  width: 16rem;
+  height: 16rem;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* Scale safely (no clipping now) */
+.testimonial-card-inner:hover {
+  transform: scale(1.05);
+}
+
+/* ===== THIN GRADIENT OUTLINE ONLY ===== */
+.testimonial-card-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    #20E3B2,
+    #2CCCFF,
+    #6A5AF9
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.testimonial-card-inner:hover::after {
+  opacity: 1;
+}
+
+
+/* ===== Scroll Reveal Animation ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ===== PAGE TRANSITIONS ===== */
+
+.page {
+  animation: pageFadeIn 0.5s ease;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page {
+  animation: fadeIn 0.45s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease;
 }

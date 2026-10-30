@@ -55,7 +55,7 @@ const FeatureCard = ({ title, description, icon, color, onClick }: FeatureCardPr
     <button
       onClick={onClick}
       className={cn(
-        "w-full p-6 rounded-2xl border-2 bg-card text-left transition-all duration-300",
+        "w-full p-9 rounded-2xl border-2 bg-card text-left transition-all duration-300",
         "hover:scale-[1.03] active:scale-[0.98]",
         colors.border,
         colors.glow

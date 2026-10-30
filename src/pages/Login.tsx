@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/hooks/useAuth';
 import { toast } from 'sonner';
-import { Eye, EyeOff, Mail, Lock, Sparkles } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, Sparkles,GraduationCap, BookOpen, Lightbulb, Target, Rocket, Brain, Puzzle, Award } from 'lucide-react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -65,9 +65,46 @@ const Login = () => {
     <div className="min-h-screen gradient-hero flex flex-col items-center justify-center p-6">
       {/* Decorative elements */}
       <div className="absolute top-20 left-10 w-20 h-20 rounded-full bg-primary/10 animate-float" />
-      <div className="absolute bottom-32 right-10 w-16 h-16 rounded-full bg-accent/10 animate-float" style={{ animationDelay: '1s' }} />
-      <div className="absolute top-40 right-20 w-12 h-12 rounded-full bg-feature-learn/10 animate-float" style={{ animationDelay: '2s' }} />
-      
+      <div className="absolute bottom-56 right-10 w-16 h-16 rounded-full bg-accent/10 animate-float" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-20 right-20 w-12 h-12 rounded-full bg-feature-learn/10 animate-float" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-28 left-80 opacity-[0.08] animate-float">
+        <BookOpen className="w-24 h-24 text-primary" />
+      </div>
+      <div className="absolute top-52 left-10 opacity-[0.08] animate-float" style={{ animationDelay: '2.5s' }}>
+        <Puzzle className="w-16 h-16 text-feature-quiz" />
+      </div>
+      <div className="absolute top-60 right-16 opacity-[0.08] animate-float" style={{ animationDelay: '3s' }}>
+        <Rocket className="w-14 h-14 text-accent" />
+      </div>
+      <div className="absolute top-36 right-80 opacity-[0.08] animate-float" style={{ animationDelay: '0.5s' }}>
+        <GraduationCap className="w-20 h-20 text-accent" />
+      </div>
+      <div className="absolute top-96 left-60 opacity-[0.08] animate-float" style={{ animationDelay: '1s' }}>
+        <Lightbulb className="w-16 h-16 text-feature-learn" />
+      </div>
+      <div className="absolute top-96 right-60 opacity-[0.08] animate-float" style={{ animationDelay: '1.5s' }}>
+        <Target className="w-20 h-20 text-feature-teach" />
+      </div>
+      <div className="absolute top-[600px] left-14 opacity-[0.08] animate-float" style={{ animationDelay: '2s' }}>
+        <Brain className="w-14 h-14 text-feature-study" />
+      </div>
+      <div className="absolute top-[600px] right-16 opacity-[0.08] animate-float">
+        <BookOpen className="w-16 h-16 text-primary" />
+      </div>
+      <div className="absolute top-[850px] right-16 opacity-[0.08] animate-float" style={{ animationDelay: '2.5s' }}>
+        <Puzzle className="w-16 h-16 text-feature-quiz" />
+      </div>
+      <div className="absolute top-[850px] left-16 opacity-[0.08] animate-float" style={{ animationDelay: '3s' }}>
+        <Rocket className="w-14 h-14 text-accent" />
+      </div>
+      <div className="absolute top-[1150px] right-20 opacity-[0.08] animate-float" style={{ animationDelay: '3.5s' }}>
+        <Award className="w-16 h-16 text-primary" />
+      </div>
+      <div className="absolute top-[1100px] left-20 opacity-[0.08] animate-float"
+        style={{ animationDelay: '4s' }}
+      >
+      <Brain className="w-20 h-20 text-feature-study" />
+      </div>
       <div className="w-full max-w-md animate-slide-up">
         {/* Logo/Brand */}
         <div className="text-center mb-8">
